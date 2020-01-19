@@ -1,4 +1,11 @@
 <?php
+namespace SpreadsheetReader;
+
+use Iterator;
+use Countable;
+use ZipArchive;
+use XMLReader;
+
 /**
  * Class for parsing ODS files
  *
@@ -122,7 +129,7 @@
 							$this -> SheetReader -> next();
 						}
 					}
-					
+
 					$this -> SheetReader -> close();
 				}
 			}
@@ -153,10 +160,10 @@
 		}
 
 		// !Iterator interface methods
-		/** 
+		/**
 		 * Rewind the Iterator to the first element.
 		 * Similar to the reset() function for arrays in PHP
-		 */ 
+		 */
 		public function rewind()
 		{
 			if ($this -> Index > 0)
@@ -192,10 +199,10 @@
 			return $this -> CurrentRow;
 		}
 
-		/** 
-		 * Move forward to next element. 
-		 * Similar to the next() function for arrays in PHP 
-		 */ 
+		/**
+		 * Move forward to next element.
+		 * Similar to the next() function for arrays in PHP
+		 */
 		public function next()
 		{
 			$this -> Index++;
@@ -275,7 +282,7 @@
 								$this -> CurrentRow[] = $LastCellContent;
 
 								if ($this -> Content -> getAttribute('table:number-columns-repeated') !== null)
-								{                                                                                            
+								{
 									$RepeatedColumnCount = $this -> Content -> getAttribute('table:number-columns-repeated');
 									// Checking if larger than one because the value is already added to the row once before
 									if ($RepeatedColumnCount > 1)
@@ -304,23 +311,23 @@
 			return $this -> CurrentRow;
 		}
 
-		/** 
+		/**
 		 * Return the identifying key of the current element.
 		 * Similar to the key() function for arrays in PHP
 		 *
 		 * @return mixed either an integer or a string
-		 */ 
+		 */
 		public function key()
 		{
 			return $this -> Index;
 		}
 
-		/** 
+		/**
 		 * Check if there is a current element after calls to rewind() or next().
 		 * Used to check if we've iterated to the end of the collection
 		 *
 		 * @return boolean FALSE if there's nothing more to iterate over
-		 */ 
+		 */
 		public function valid()
 		{
 			return $this -> Valid;

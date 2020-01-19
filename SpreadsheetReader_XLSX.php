@@ -1,4 +1,14 @@
 <?php
+namespace SpreadsheetReader;
+
+use Iterator;
+use Countable;
+use ZipArchive;
+use SimpleXMLElement;
+use XMLReader;
+use DateTime;
+use DateTimeZone;
+
 /**
  * Class for parsing XLSX files specifically
  *
@@ -278,7 +288,7 @@
 						}
 					}
 				}
-				
+
 				if ($this -> StylesXML -> numFmts && $this -> StylesXML -> numFmts -> numFmt)
 				{
 					foreach ($this -> StylesXML -> numFmts -> numFmt as $Index => $NumFmt)
@@ -549,7 +559,7 @@
 					else
 					{
 						$this -> SSOpen = true;
-	
+
 						if ($this -> SharedStringIndex < $Index)
 						{
 							$this -> SSOpen = false;
@@ -662,7 +672,7 @@
 				{
 					$Sections = explode(';', $Format['Code']);
 					$Format['Code'] = $Sections[0];
-	
+
 					switch (count($Sections))
 					{
 						case 2:
@@ -866,7 +876,7 @@
 						$AdjDecimalDivisor = $DecimalDivisor/$GCD;
 
 						if (
-							strpos($Format['Code'], '0') !== false || 
+							strpos($Format['Code'], '0') !== false ||
 							strpos($Format['Code'], '#') !== false ||
 							substr($Format['Code'], 0, 3) == '? ?'
 						)
@@ -913,7 +923,7 @@
 						$Value = preg_replace('', $Format['Currency'], $Value);
 					}
 				}
-				
+
 			}
 
 			return $Value;
@@ -937,10 +947,10 @@
 		}
 
 		// !Iterator interface methods
-		/** 
+		/**
 		 * Rewind the Iterator to the first element.
 		 * Similar to the reset() function for arrays in PHP
-		 */ 
+		 */
 		public function rewind()
 		{
 			// Removed the check whether $this -> Index == 0 otherwise ChangeSheet doesn't work properly
@@ -980,10 +990,10 @@
 			return $this -> CurrentRow;
 		}
 
-		/** 
-		 * Move forward to next element. 
-		 * Similar to the next() function for arrays in PHP 
-		 */ 
+		/**
+		 * Move forward to next element.
+		 * Similar to the next() function for arrays in PHP
+		 */
 		public function next()
 		{
 			$this -> Index++;
@@ -1117,23 +1127,23 @@
 			return $this -> CurrentRow;
 		}
 
-		/** 
+		/**
 		 * Return the identifying key of the current element.
 		 * Similar to the key() function for arrays in PHP
 		 *
 		 * @return mixed either an integer or a string
-		 */ 
+		 */
 		public function key()
 		{
 			return $this -> Index;
 		}
 
-		/** 
+		/**
 		 * Check if there is a current element after calls to rewind() or next().
 		 * Used to check if we've iterated to the end of the collection
 		 *
 		 * @return boolean FALSE if there's nothing more to iterate over
-		 */ 
+		 */
 		public function valid()
 		{
 			return $this -> Valid;
