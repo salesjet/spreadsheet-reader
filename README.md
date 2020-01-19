@@ -1,5 +1,5 @@
-##本fork使用说明
-###如何在laravel中使用:
+## 本fork使用说明
+### 如何在laravel中使用:
 ##### 1创建目录 repositories
 ##### 2打包下载zip压缩包 解药到repositories 得到 repositories/spreadsheet-reader-master
 ##### 3composer.json psd-4里面加上 "SpreadsheetReader\\": "repositories/spreadsheet-reader-master/"
