@@ -1,7 +1,9 @@
+##本fork使用说明
 ###如何在laravel中使用:
 ##### 1创建目录 repositories
 ##### 2打包下载zip压缩包 解药到repositories 得到 repositories/spreadsheet-reader-master
 ##### 3composer.json psd-4里面加上 "SpreadsheetReader\\": "repositories/spreadsheet-reader-master/"
+-----隔------
 **spreadsheet-reader** is a PHP spreadsheet reader that differs from others in that the main goal for it was efficient
 data extraction that could handle large (as in really large) files. So far it may not definitely be CPU, time
 or I/O-efficient but at least it won't run out of memory (except maybe for XLS files).
